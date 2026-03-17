@@ -1,1133 +1,506 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Wafae Bilal - Backend Developer & Software Engineering Student">
-    <title>Wafae Bilal | Backend Developer</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --dark-bg: #0a0e27;
-            --dark-card: #141829;
-            --dark-border: #1f2937;
-            --olive: #556B2F;
-            --gold: #C19A6B;
-            --text-light: #e0e0e0;
-            --text-muted: #9ca3af;
-            --accent: #fbbf24;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, var(--dark-bg) 0%, #0f1328 100%);
-            color: var(--text-light);
-            line-height: 1.6;
-            min-height: 100vh;
-            transition: all 0.3s ease;
-        }
-
-        /* ===== NAVIGATION ===== */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(10, 14, 39, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--dark-border);
-            z-index: 1000;
-            padding: 1rem 0;
-            transition: all 0.3s ease;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--gold), var(--olive));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -1px;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 2.5rem;
-            flex-wrap: wrap;
-        }
-
-        nav a {
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            position: relative;
-            transition: color 0.3s ease;
-        }
-
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--gold), var(--olive));
-            transition: width 0.3s ease;
-        }
-
-        nav a:hover {
-            color: var(--gold);
-        }
-
-        nav a:hover::after {
-            width: 100%;
-        }
-
-        .cta-btn {
-            background: linear-gradient(135deg, var(--gold), #d4a574);
-            color: var(--dark-bg);
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 6px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .cta-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(193, 154, 107, 0.3);
-        }
-
-        /* ===== HERO SECTION ===== */
-        .hero {
-            margin-top: 60px;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 0 2rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -10%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(193, 154, 107, 0.1) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: -30%;
-            left: -5%;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(85, 107, 47, 0.08) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: float 8s ease-in-out infinite reverse;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(30px); }
-        }
-
-        .hero-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            position: relative;
-            z-index: 1;
-            width: 100%;
-        }
-
-        .hero-content h1 {
-            font-size: 4.5rem;
-            font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, var(--gold), var(--text-light));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: slideInLeft 0.8s ease-out;
-        }
-
-        .hero-content .title {
-            font-size: 1.5rem;
-            color: var(--gold);
-            margin-bottom: 1rem;
-            font-weight: 600;
-            animation: slideInLeft 0.8s ease-out 0.1s both;
-        }
-
-        .hero-content p {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-            line-height: 1.8;
-            animation: slideInLeft 0.8s ease-out 0.2s both;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 1.5rem;
-            animation: slideInLeft 0.8s ease-out 0.3s both;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--gold), #d4a574);
-            color: var(--dark-bg);
-            padding: 1rem 2.5rem;
-            border: none;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 30px rgba(193, 154, 107, 0.4);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--gold);
-            padding: 1rem 2.5rem;
-            border: 2px solid var(--gold);
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .btn-secondary:hover {
-            background: var(--gold);
-            color: var(--dark-bg);
-            transform: translateY(-4px);
-        }
-
-        .hero-image {
-            position: relative;
-            animation: slideInRight 0.8s ease-out;
-        }
-
-        .profile-frame {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 3/4;
-            border-radius: 20px;
-            overflow: hidden;
-            border: 3px solid var(--gold);
-            box-shadow: 0 30px 60px rgba(193, 154, 107, 0.2);
-        }
-
-        .profile-frame::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(193, 154, 107, 0.2) 0%, transparent 100%);
-            z-index: 1;
-        }
-
-        .profile-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-50px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        @keyframes slideInRight {
-            from { opacity: 0; transform: translateX(50px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        /* ===== STATS SECTION ===== */
-        .stats {
-            background: var(--dark-card);
-            padding: 4rem 2rem;
-            margin: 4rem 0;
-            border-top: 1px solid var(--dark-border);
-            border-bottom: 1px solid var(--dark-border);
-        }
-
-        .stats-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 3rem;
-            text-align: center;
-        }
-
-        .stat-item h3 {
-            font-size: 3rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--gold), var(--olive));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-item p {
-            color: var(--text-muted);
-            font-size: 1rem;
-        }
-
-        /* ===== MAIN CONTENT ===== */
-        main {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        section {
-            margin: 5rem 0;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-header h2 {
-            font-size: 3rem;
-            font-weight: 900;
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-header h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--gold), var(--olive));
-            border-radius: 2px;
-        }
-
-        .section-header p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            margin-top: 1.5rem;
-        }
-
-        /* ===== ABOUT SECTION ===== */
-        .about-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            margin: 3rem 0;
-        }
-
-        .profile-photo-wrapper {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .profile-photo-frame {
-            position: relative;
-            width: 300px;
-            height: 380px;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(193, 154, 107, 0.2);
-            border: 4px solid var(--gold);
-            animation: fadeInLeft 0.8s ease-out;
-        }
-
-        .profile-photo-frame::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(193, 154, 107, 0.3) 0%, transparent 100%);
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .profile-photo-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        @keyframes fadeInLeft {
-            from { opacity: 0; transform: translateX(-30px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        @keyframes fadeInRight {
-            from { opacity: 0; transform: translateX(30px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        .profile-text {
-            animation: fadeInRight 0.8s ease-out;
-        }
-
-        .profile-text p {
-            margin-bottom: 1.5rem;
-            color: var(--text-muted);
-            line-height: 1.9;
-            font-size: 1.05rem;
-        }
-
-        .contact-info {
-            background: linear-gradient(135deg, var(--dark-card) 0%, #1a1f35 100%);
-            padding: 2rem;
-            border-left: 5px solid var(--gold);
-            margin: 2rem 0;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            box-shadow: 0 6px 20px rgba(193, 154, 107, 0.12);
-        }
-
-        .contact-info:hover {
-            transform: translateX(8px);
-            box-shadow: 0 10px 30px rgba(193, 154, 107, 0.2);
-        }
-
-        .contact-info p {
-            margin: 0.8rem 0;
-            color: var(--text-muted);
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-
-        .contact-info i {
-            color: var(--gold);
-            width: 24px;
-        }
-
-        .contact-info strong {
-            color: var(--gold);
-            font-weight: 700;
-        }
-
-        /* ===== SKILLS SECTION ===== */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .skill-category {
-            background: linear-gradient(135deg, var(--dark-card) 0%, #1a1f35 100%);
-            padding: 2.5rem;
-            border-radius: 12px;
-            border: 1px solid var(--dark-border);
-            transition: all 0.3s ease;
-        }
-
-        .skill-category:hover {
-            border-color: var(--gold);
-            box-shadow: 0 8px 24px rgba(193, 154, 107, 0.15);
-            transform: translateY(-8px);
-        }
-
-        .skill-category h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            color: var(--gold);
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-
-        .skill-category i {
-            font-size: 1.5rem;
-        }
-
-        .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-        }
-
-        .skill-tag {
-            background: var(--dark-border);
-            color: var(--text-light);
-            padding: 0.5rem 1.2rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            border: 1px solid rgba(193, 154, 107, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .skill-tag:hover {
-            background: var(--gold);
-            color: var(--dark-bg);
-            border-color: var(--gold);
-        }
-
-        /* ===== PROJECTS SECTION ===== */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2.5rem;
-            margin-top: 3rem;
-        }
-
-        .project-card {
-            background: linear-gradient(135deg, var(--dark-card) 0%, #1a1f35 100%);
-            border: 1px solid var(--dark-border);
-            border-radius: 12px;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        .project-card:hover {
-            border-color: var(--gold);
-            box-shadow: 0 12px 40px rgba(193, 154, 107, 0.2);
-            transform: translateY(-12px);
-        }
-
-        .project-icon {
-            width: 100%;
-            height: 120px;
-            background: linear-gradient(135deg, rgba(193, 154, 107, 0.1), rgba(85, 107, 47, 0.1));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            border-bottom: 1px solid var(--dark-border);
-        }
-
-        .project-content {
-            padding: 2rem;
-        }
-
-        .project-content h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.8rem;
-            color: var(--gold);
-        }
-
-        .project-content p {
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-            line-height: 1.7;
-        }
-
-        .project-tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .tech-tag {
-            background: var(--dark-border);
-            color: var(--text-light);
-            padding: 0.3rem 0.8rem;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            border: 1px solid rgba(193, 154, 107, 0.2);
-        }
-
-        /* ===== EDUCATION SECTION ===== */
-        .education-item {
-            background: linear-gradient(135deg, var(--dark-card) 0%, #1a1f35 100%);
-            padding: 2rem;
-            border-radius: 12px;
-            border-left: 4px solid var(--gold);
-            margin-bottom: 2rem;
-            transition: all 0.3s ease;
-        }
-
-        .education-item:hover {
-            box-shadow: 0 8px 24px rgba(193, 154, 107, 0.15);
-            transform: translateX(8px);
-        }
-
-        .education-item h3 {
-            color: var(--gold);
-            margin-bottom: 0.5rem;
-            font-size: 1.2rem;
-        }
-
-        .education-item .year {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .education-item p {
-            color: var(--text-muted);
-            margin: 0.5rem 0;
-        }
-
-        /* ===== LISTS ===== */
-        ul, ol {
-            margin-left: 2rem;
-            color: var(--text-muted);
-        }
-
-        li {
-            margin-bottom: 1rem;
-            transition: all 0.2s ease;
-            font-weight: 500;
-        }
-
-        li:hover {
-            color: var(--gold);
-            transform: translateX(8px);
-        }
-
-        li strong {
-            color: var(--text-light);
-        }
-
-        /* ===== CONTACT SECTION ===== */
-        .contact-section {
-            text-align: center;
-            padding: 4rem 2rem;
-            background: linear-gradient(135deg, var(--dark-card) 0%, #1a1f35 100%);
-            border-radius: 16px;
-            margin: 5rem 0;
-            border: 1px solid var(--dark-border);
-        }
-
-        .contact-section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .contact-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 2.5rem;
-            flex-wrap: wrap;
-        }
-
-        .contact-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.8rem;
-            padding: 1rem 2rem;
-            background: var(--dark-border);
-            border: 2px solid var(--dark-border);
-            color: var(--text-light);
-            text-decoration: none;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            font-weight: 600;
-        }
-
-        .contact-link:hover {
-            border-color: var(--gold);
-            color: var(--gold);
-        }
-
-        /* ===== DARK MODE TOGGLE ===== */
-        .dark-mode-toggle {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--gold), var(--olive));
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: var(--dark-bg);
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            box-shadow: 0 4px 16px rgba(193, 154, 107, 0.3);
-            z-index: 999;
-        }
-
-        .dark-mode-toggle:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 24px rgba(193, 154, 107, 0.4);
-        }
-
-        /* ===== FOOTER ===== */
-        footer {
-            background: var(--dark-card);
-            border-top: 1px solid var(--dark-border);
-            padding: 3rem 2rem;
-            text-align: center;
-            color: var(--text-muted);
-            margin-top: 6rem;
-        }
-
-        footer p {
-            margin: 0.5rem 0;
-        }
-
-        footer strong {
-            color: var(--text-light);
-        }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 768px) {
-            .hero-container {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .hero-content h1 {
-                font-size: 2.8rem;
-            }
-
-            nav ul {
-                gap: 1rem;
-                font-size: 0.85rem;
-            }
-
-            .stats-container {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .section-header h2 {
-                font-size: 2rem;
-            }
-
-            .hero {
-                margin-top: 80px;
-                min-height: auto;
-                padding: 2rem;
-            }
-
-            .about-container {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .profile-photo-frame {
-                width: 280px;
-                height: 350px;
-            }
-
-            .skills-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-links {
-                flex-direction: column;
-            }
-
-            .contact-link {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .dark-mode-toggle {
-                width: 50px;
-                height: 50px;
-                font-size: 1.2rem;
-                bottom: 1rem;
-                right: 1rem;
-            }
-
-            nav {
-                padding: 0.8rem 0;
-            }
-
-            .nav-container {
-                padding: 0 1rem;
-            }
-
-            .cta-btn {
-                padding: 0.6rem 1.2rem;
-                font-size: 0.85rem;
-            }
-        }
-    </style>
+  <!-- Meta Tags -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- SEO Meta Tags -->
+  <title>SoulSpace Café - Disconnect. Breathe. Feel. | Mohammedia, Morocco</title>
+  <meta name="description"
+    content="A cozy café in Mohammedia where you disconnect from the digital world and reconnect with your soul. Experience mindful coffee, books, and peaceful moments.">
+  <meta name="keywords"
+    content="café, coffee, Mohammedia, Morocco, digital detox, peaceful café, cozy space, mindful coffee, reading space">
+  <meta name="author" content="Bilal Wafae">
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="SoulSpace Café - Disconnect. Breathe. Feel.">
+  <meta property="og:description"
+    content="A space to disconnect from the digital world and reconnect with your soul in Mohammedia, Morocco.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://soulspacecafe.com">
+  <meta property="og:image" content="images/soulspace-og-image.jpg">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;1,400&display=swap"
+    rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-    <!-- Navigation -->
-    <nav>
-        <div class="nav-container">
-            <div class="logo">WB</div>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <button class="cta-btn">Get in Touch</button>
-        </div>
-    </nav>
+  <!-- Navigation Bar -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">SoulSpace Café</a>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-container">
-            <div class="hero-content">
-                <p class="title">👋 Hello, I'm</p>
-                <h1>Wafae Bilal</h1>
-                <p>Backend Developer | Full-Stack Learner | Tech Enthusiast</p>
-                <p>First-year Software Engineering student with a BTS in Information Systems. Passionate about learning new technologies and building scalable, innovative solutions with real-world impact.</p>
-                <div class="hero-buttons">
-                    <button class="btn-primary">Download CV</button>
-                    <button class="btn-secondary">View Work</button>
-                </div>
-            </div>
-            <div class="hero-image">
-                <div class="profile-frame">
-                    <img src="my-photo.jpeg" alt="Wafae Bilal">
-                </div>
-            </div>
-        </div>
-    </section>
+      <!-- Mobile Menu Toggle -->
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
 
-    <!-- Stats Section -->
-    <div class="stats">
-        <div class="stats-container">
-            <div class="stat-item">
-                <h3>5+</h3>
-                <p>Major Projects Completed</p>
-            </div>
-            <div class="stat-item">
-                <h3>20+</h3>
-                <p>Technical Skills</p>
-            </div>
-            <div class="stat-item">
-                <h3>3</h3>
-                <p>Years Learning Experience</p>
-            </div>
-            <div class="stat-item">
-                <h3>100%</h3>
-                <p>Dedication & Passion</p>
-            </div>
-        </div>
+      <!-- Navigation Links -->
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
     </div>
+  </nav>
 
-    <!-- Main Content -->
-    <main>
+  <!-- Hero Section -->
+  <section class="hero">
+    <!-- Background Video -->
+    <video class="hero-video" autoplay muted loop playsinline>
+      <source src="videos/cafe-ambiance.mp4" type="video/mp4">
+      <!-- Fallback image if video doesn't load -->
+      <img src="images/hero-fallback.jpg" alt="Cozy café atmosphere" class="hero-background">
+    </video>
+
+    <!-- Overlay -->
+    <div class="hero-overlay"></div>
+
+    <!-- Hero Content -->
+    <div class="hero-content">
+      <h1 class="hero-title">SoulSpace Café</h1>
+      <p class="hero-subtitle">Disconnect. Breathe. Feel.</p>
+      <div class="hero-buttons">
+        <a href="#philosophy" class="btn btn-primary">Discover the Space</a>
+        <a href="contact.html" class="btn btn-secondary">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Philosophy Section -->
+  <section id="philosophy" class="section">
+    <div class="container">
+      <h2 class="section-title">Our Philosophy</h2>
+      <div class="grid grid-2" style="align-items: center; gap: 4rem;">
+        <!-- Philosophy Text -->
+        <div class="reveal">
+          <p style="font-size: 1.25rem; line-height: 1.9; color: var(--brown);">
+            In a world where <span class="accent-text">screens dominate our attention</span> and
+            notifications interrupt our peace, SoulSpace Café offers something rare:
+            <strong>a sanctuary for your soul</strong>.
+          </p>
+          <p style="margin-top: 1.5rem;">
+            We believe that true connection begins when you disconnect from the digital noise.
+            Here, you'll find warm coffee, gentle music, the rustle of pages turning,
+            and the quiet joy of being present. This is not just a café—it's a space where
+            you rediscover yourself, one mindful moment at a time.
+          </p>
+          <p style="margin-top: 1.5rem; font-style: italic; color: var(--terracotta);">
+            "In stillness, we find clarity. In silence, we hear our souls."
+          </p>
+        </div>
+
+        <!-- Philosophy Image -->
+        <div class="reveal" style="animation-delay: 0.2s;">
+          <img src="images/philosophy-cozy-corner.jpg" alt="Cozy reading corner with books and warm lighting"
+            class="img-responsive img-rounded img-shadow" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Spaces Section -->
+  <section id="spaces" class="section"
+    style="background: linear-gradient(135deg, var(--soft-beige) 0%, var(--warm-white) 100%);">
+    <div class="container">
+      <h2 class="section-title">Our Spaces</h2>
+      <p class="section-subtitle">
+        Each corner of SoulSpace is thoughtfully designed to nurture different aspects of your well-being
+      </p>
+
+      <div class="grid grid-4">
+        <!-- Café Space -->
+        <div class="card reveal">
+          <div class="card-icon">☕</div>
+          <h3 class="card-title">The Café</h3>
+          <p class="card-text">
+            Savor artisan coffee and fresh pastries in an atmosphere of warmth and calm.
+            Every cup is crafted with intention.
+          </p>
+        </div>
+
+        <!-- Library Space -->
+        <div class="card reveal" style="animation-delay: 0.1s;">
+          <div class="card-icon">📚</div>
+          <h3 class="card-title">The Library</h3>
+          <p class="card-text">
+            Lose yourself in carefully curated books. From philosophy to poetry,
+            find words that speak to your soul.
+          </p>
+        </div>
+
+        <!-- Green Space -->
+        <div class="card reveal" style="animation-delay: 0.2s;">
+          <div class="card-icon">🌿</div>
+          <h3 class="card-title">Green Space</h3>
+          <p class="card-text">
+            Surrounded by plants and natural light, this space brings the outdoors in,
+            creating a serene environment for reflection.
+          </p>
+        </div>
+
+        <!-- Relaxation Zone -->
+        <div class="card reveal" style="animation-delay: 0.3s;">
+          <div class="card-icon">🧘</div>
+          <h3 class="card-title">Relaxation Zone</h3>
+          <p class="card-text">
+            Soft cushions, gentle lighting, and peaceful music create the perfect
+            setting for meditation and contemplation.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu Preview Section -->
+  <section id="menu-preview" class="section">
+    <div class="container">
+      <h2 class="section-title">Menu Highlights</h2>
+      <p class="section-subtitle">
+        Thoughtfully crafted beverages and treats to nourish body and soul
+      </p>
+
+      <!-- Menu Table with colspan/rowspan -->
+      <div style="overflow-x: auto; margin-top: 3rem;">
+        <table
+          style="width: 100%; max-width: 900px; margin: 0 auto; border-collapse: collapse; background: var(--warm-white); border-radius: 8px; overflow: hidden; box-shadow: 0 8px 25px rgba(107, 79, 58, 0.1);">
+          <thead>
+            <tr style="background: var(--brown); color: var(--cream);">
+              <th colspan="3"
+                style="padding: 1.5rem; text-align: center; font-family: var(--font-display); font-size: 1.5rem; letter-spacing: 0.05em;">
+                ✨ SoulSpace Menu ✨
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Coffee Section -->
+            <tr style="background: var(--beige);">
+              <td rowspan="4"
+                style="padding: 1.25rem; font-weight: 700; color: var(--brown); border-right: 2px solid var(--cream); vertical-align: top; font-family: var(--font-display); font-size: 1.25rem;">
+                ☕ Coffee
+              </td>
+              <td style="padding: 1rem 1.25rem; border-bottom: 1px solid var(--cream);">
+                Espresso
+              </td>
+              <td
+                style="padding: 1rem 1.25rem; text-align: right; color: var(--terracotta); font-weight: 600; border-bottom: 1px solid var(--cream);">
+                20 MAD
+              </td>
+            </tr>
+            <tr style="background: var(--warm-white);">
+              <td style="padding: 1rem 1.25rem; border-bottom: 1px solid var(--cream);">
+                Cappuccino
+              </td>
+              <td
+                style="padding: 1rem 1.25rem; text-align: right; color: var(--terracotta); font-weight: 600; border-bottom: 1px solid var(--cream);">
+                28 MAD
+              </td>
+            </tr>
+            <tr style="background: var(--beige);">
+              <td style="padding: 1rem 1.25rem; border-bottom: 1px solid var(--cream);">
+                Latte (Vanilla or Caramel)
+              </td>
+              <td
+                style="padding: 1rem 1.25rem; text-align: right; color: var(--terracotta); font-weight: 600; border-bottom: 1px solid var(--cream);">
+                32 MAD
+              </td>
+            </tr>
+            <tr style="background: var(--warm-white);">
+              <td style="padding: 1rem 1.25rem;">
+                Cold Brew
+              </td>
+              <td style="padding: 1rem 1.25rem; text-align: right; color: var(--terracotta); font-weight: 600;">
+                30 MAD
+              </td>
+            </tr>
+
+            <!-- Tea & Matcha Section -->
+            <tr style="background: var(--beige);">
+              <td rowspan="3"
+                style="padding: 1.25rem; font-weight: 700; color: var(--brown); border-right: 2px solid var(--cream); vertical-align: top; font-family: var(--font-display); font-size: 1.25rem;">
+                🍵 Tea & Matcha
+              </td>
+              <td style="padding: 1rem 1.25rem; border-bottom: 1px solid var(--cream);">
+                Ceremonial Matcha Latte
+              </td>
+              <td
+                style="padding: 1rem 1.25rem; text-align: right; color: var(--terracotta); font-weight: 600; border-bottom: 1px solid var(--cream);">
+                38 MAD
+              </td>
+            </tr>
+            <tr style="background: var(--warm-white);">
+              <td style="padding: 1rem 1.25rem; border-bottom: 1px solid var(--cream);">
+                Herbal Tea Selection
+              </td>
+              <td
+                style="padding: 1rem 1.25rem; text-align: right; color: var(--terracotta); font-weight: 600; border-bottom: 1px solid var(--cream);">
+                22 MAD
+              </td>
+            </tr>
+            <tr style="background: var(--beige);">
+              <td style="padding: 1rem 1.25rem;">
+                Moroccan Mint Tea
+              </td>
+              <td style="padding: 1rem 1.25rem; text-align: right; color: var(--terracotta); font-weight: 600;">
+                18 MAD
+              </td>
+            </tr>
+
+            <!-- Pastries Section -->
+            <tr style="background: var(--warm-white);">
+              <td rowspan="3"
+                style="padding: 1.25rem; font-weight: 700; color: var(--brown); border-right: 2px solid var(--cream); vertical-align: top; font-family: var(--font-display); font-size: 1.25rem;">
+                🥐 Pastries
+              </td>
+              <td style="padding: 1rem 1.25rem; border-bottom: 1px solid var(--cream);">
+                Almond Croissant
+              </td>
+              <td
+                style="padding: 1rem 1.25rem; text-align: right; color: var(--terracotta); font-weight: 600; border-bottom: 1px solid var(--cream);">
+                25 MAD
+              </td>
+            </tr>
+            <tr style="background: var(--beige);">
+              <td style="padding: 1rem 1.25rem; border-bottom: 1px solid var(--cream);">
+                Homemade Banana Bread
+              </td>
+              <td
+                style="padding: 1rem 1.25rem; text-align: right; color: var(--terracotta); font-weight: 600; border-bottom: 1px solid var(--cream);">
+                20 MAD
+              </td>
+            </tr>
+            <tr style="background: var(--warm-white);">
+              <td style="padding: 1rem 1.25rem;">
+                Seasonal Cake Slice
+              </td>
+              <td style="padding: 1rem 1.25rem; text-align: right; color: var(--terracotta); font-weight: 600;">
+                28 MAD
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr style="background: var(--green); color: var(--cream);">
+              <td colspan="3" style="padding: 1rem; text-align: center; font-style: italic;">
+                All prices include our commitment to quality, sustainability, and your peaceful experience
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section id="testimonials" class="section"
+    style="background: linear-gradient(135deg, var(--beige) 0%, var(--soft-beige) 100%);">
+    <div class="container">
+      <h2 class="section-title">What Our Visitors Say</h2>
+      <p class="section-subtitle">
+        Hear from those who have found their peace at SoulSpace
+      </p>
+
+      <div class="grid grid-3" style="margin-top: 3rem;">
+        <!-- Testimonial 1 -->
+        <div class="card reveal">
+          <p style="font-style: italic; color: var(--dark-brown); margin-bottom: 1.5rem; line-height: 1.8;">
+            "I came here feeling overwhelmed by work and life. After two hours with a book
+            and a perfect cappuccino, I left feeling like myself again. This place is magic."
+          </p>
+          <div style="display: flex; align-items: center; gap: 1rem;">
+            <div
+              style="width: 50px; height: 50px; border-radius: 50%; background: var(--terracotta); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 1.25rem;">
+              S
+            </div>
+            <div>
+              <p style="font-weight: 700; margin: 0; color: var(--brown);">Sarah M.</p>
+              <p style="font-size: 0.9rem; margin: 0; opacity: 0.7;">Regular Visitor</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="card reveal" style="animation-delay: 0.1s;">
+          <p style="font-style: italic; color: var(--dark-brown); margin-bottom: 1.5rem; line-height: 1.8;">
+            "Finally, a place where I don't feel guilty for putting my phone away.
+            The ambiance, the plants, the silence—it's exactly what my soul needed."
+          </p>
+          <div style="display: flex; align-items: center; gap: 1rem;">
+            <div
+              style="width: 50px; height: 50px; border-radius: 50%; background: var(--green); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 1.25rem;">
+              K
+            </div>
+            <div>
+              <p style="font-weight: 700; margin: 0; color: var(--brown);">Karim B.</p>
+              <p style="font-size: 0.9rem; margin: 0; opacity: 0.7;">Digital Detox Seeker</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="card reveal" style="animation-delay: 0.2s;">
+          <p style="font-style: italic; color: var(--dark-brown); margin-bottom: 1.5rem; line-height: 1.8;">
+            "The matcha latte is incredible, but what keeps me coming back is the feeling.
+            I've never felt so calm and present in a public space before."
+          </p>
+          <div style="display: flex; align-items: center; gap: 1rem;">
+            <div
+              style="width: 50px; height: 50px; border-radius: 50%; background: var(--brown); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 1.25rem;">
+              L
+            </div>
+            <div>
+              <p style="font-weight: 700; margin: 0; color: var(--brown);">Laila F.</p>
+              <p style="font-size: 0.9rem; margin: 0; opacity: 0.7;">Mindfulness Enthusiast</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action Section -->
+  <section class="section">
+    <div class="container" style="text-align: center;">
+      <h2 class="section-title">Ready to Reconnect?</h2>
+      <p style="font-size: 1.25rem; max-width: 600px; margin: 0 auto 2rem; color: var(--brown);">
+        Visit us today and experience the peace you've been searching for.
+      </p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="contact.html" class="btn btn-primary">Get Directions</a>
+        <a href="gallery.html" class="btn btn-secondary">See Our Space</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
         <!-- About Section -->
-        <section id="about">
-            <div class="section-header">
-                <h2>About Me</h2>
-            </div>
-            <div class="about-container">
-                <div class="profile-photo-wrapper">
-                    <div class="profile-photo-frame">
-                        <img src="my-photo.jpeg" alt="Wafae Bilal - Professional Headshot">
-                    </div>
-                </div>
-                <div class="profile-text">
-                    <p>First-year Software Engineering student with a Higher Technician Certificate (BTS) in Information Systems Development, achieved with top honors. Currently developing expertise in Java 21 backend development and Full-Stack solutions.</p>
-                    <p>Passionate about building innovative, scalable digital solutions with real-world impact. I love tackling complex problems and transforming ideas into elegant, efficient code.</p>
-                    <div class="contact-info">
-                        <p><i class="fas fa-map-marker-alt"></i> <strong>Location:</strong> Mohammedia, Morocco</p>
-                        <p><i class="fas fa-envelope"></i> <strong>Email:</strong> bilalwafae078@gmail.com</p>
-                        <p><i class="fas fa-phone"></i> <strong>Phone:</strong> 06-05-75-97-89</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <div class="footer-section">
+          <h3>SoulSpace Café</h3>
+          <p>
+            A sanctuary in Mohammedia where you disconnect from the digital world
+            and reconnect with your soul.
+          </p>
+          <p style="margin-top: 1rem;">
+            <strong>Owner:</strong> Bilal Wafae
+          </p>
+        </div>
 
-        <!-- Skills Section -->
-        <section id="skills">
-            <div class="section-header">
-                <h2>Technical Skills</h2>
-                <p>Technologies I've learned and continue to explore</p>
-            </div>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3><i class="fas fa-code"></i> Backend Development</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Java</span>
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">PHP</span>
-                        <span class="skill-tag">C</span>
-                        <span class="skill-tag">VB.NET</span>
-                    </div>
-                </div>
+        <!-- Quick Links -->
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
 
-                <div class="skill-category">
-                    <h3><i class="fas fa-paint-brush"></i> Frontend Development</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">JavaScript</span>
-                        <span class="skill-tag">HTML5</span>
-                        <span class="skill-tag">CSS3</span>
-                        <span class="skill-tag">Bootstrap 5</span>
-                    </div>
-                </div>
+        <!-- Contact Info -->
+        <div class="footer-section">
+          <h3>Contact Us</h3>
+          <p>📍 Mohammedia, Morocco</p>
+          <p>📧 hello@soulspacecafe.ma</p>
+          <p>📞 +212 605755341</p>
+          <p style="margin-top: 1rem;">
+            <strong>Hours:</strong><br>
+            Mon-Fri: 8AM - 9PM<br>
+            Sat-Sun: 9AM - 10PM
+          </p>
+        </div>
 
-                <div class="skill-category">
-                    <h3><i class="fas fa-brain"></i> Artificial Intelligence</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">LLM APIs</span>
-                        <span class="skill-tag">Claude API</span>
-                        <span class="skill-tag">Gemini API</span>
-                        <span class="skill-tag">Prompt Engineering</span>
-                    </div>
-                </div>
+        <!-- Digital Detox Policy -->
+        <div class="footer-section">
+          <h3>Our Commitment</h3>
+          <p><strong>Digital Detox Policy:</strong></p>
+          <ul style="list-style: none; margin-top: 0.5rem;">
+            <li>🔇 No loud phone calls</li>
+            <li>📵 Mindful screen usage</li>
+            <li>🤫 Respect for silence</li>
+            <li>🌿 Peaceful environment</li>
+          </ul>
+        </div>
+      </div>
 
-                <div class="skill-category">
-                    <h3><i class="fas fa-database"></i> Databases & Design</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">SQL</span>
-                        <span class="skill-tag">MySQL</span>
-                        <span class="skill-tag">UML</span>
-                        <span class="skill-tag">Merise</span>
-                    </div>
-                </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 SoulSpace Café. All rights reserved. | Designed with 💚 for your soul.</p>
+      </div>
+    </div>
+  </footer>
 
-                <div class="skill-category">
-                    <h3><i class="fas fa-tools"></i> Tools & Design</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">MS Office</span>
-                        <span class="skill-tag">Photoshop</span>
-                        <span class="skill-tag">Git</span>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <!-- JavaScript -->
+  <script>
+    // Mobile Menu Toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
 
-        <!-- Education Section -->
-        <section id="education">
-            <div class="section-header">
-                <h2>Education</h2>
-            </div>
-            <div class="education-timeline">
-                <div class="education-item">
-                    <h3>Engineering Degree in Software Engineering</h3>
-                    <p class="year">2025 - Present</p>
-                    <p>ENSETM Engineering School</p>
-                </div>
-                <div class="education-item">
-                    <h3>Higher Technician Certificate (BTS)</h3>
-                    <p class="year">2022 - 2024</p>
-                    <p>Information Systems Development • Lycée Technique de Settat • Honors</p>
-                </div>
-                <div class="education-item">
-                    <h3>High School Diploma</h3>
-                    <p class="year">2021 - 2022</p>
-                    <p>Physical Sciences • Lycée Abdallah Laroui, Mohammedia</p>
-                </div>
-            </div>
-        </section>
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
 
-        <!-- Projects Section -->
-        <section id="projects">
-            <div class="section-header">
-                <h2>Key Projects</h2>
-                <p>Innovative solutions with real-world impact</p>
-            </div>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-icon">🚨</div>
-                    <div class="project-content">
-                        <h3>ResQ-Map</h3>
-                        <p>Crisis management platform reducing emergency response time by 60% with interactive sea-level simulations (0-50m) and automated resource calculation.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">Streamlit</span>
-                            <span class="tech-tag">Geospatial Data</span>
-                        </div>
-                    </div>
-                </div>
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
 
-                <div class="project-card">
-                    <div class="project-icon">🏥</div>
-                    <div class="project-content">
-                        <h3>Inaya Bik</h3>
-                        <p>AI-powered women's health application leveraging Claude API to deliver comprehensive health education and resources specifically designed for women's wellness.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">React.js</span>
-                            <span class="tech-tag">Claude API</span>
-                            <span class="tech-tag">UI/UX</span>
-                        </div>
-                    </div>
-                </div>
+    // Scroll reveal animation
+    const revealElements = document.querySelectorAll('.reveal');
 
-                <div class="project-card">
-                    <div class="project-icon">🛒</div>
-                    <div class="project-content">
-                        <h3>HealthyMarket</h3>
-                        <p>Full-featured e-commerce platform for organic supermarket with real-time inventory management, dynamic product catalogs, and comprehensive admin dashboard.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">PHP/Laravel</span>
-                            <span class="tech-tag">MySQL</span>
-                            <span class="tech-tag">Bootstrap</span>
-                        </div>
-                    </div>
-                </div>
+    const revealOnScroll = () => {
+      const windowHeight = window.innerHeight;
 
-                <div class="project-card">
-                    <div class="project-icon">🩸</div>
-                    <div class="project-content">
-                        <h3>Blood Donation System</h3>
-                        <p>Enterprise-grade MVC application for efficient donor management and transfusion center coordination. Streamlines requests and donor records.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">PHP</span>
-                            <span class="tech-tag">MySQL</span>
-                            <span class="tech-tag">MVC</span>
-                        </div>
-                    </div>
-                </div>
-        </section>
+      revealElements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const revealPoint = 100;
 
-        <!-- Certifications Section -->
-        <section id="certifications">
-            <div class="section-header">
-                <h2>Certifications & Achievements</h2>
-            </div>
-            <ul>
-                <li><strong>Oracle Certified Professional</strong> – Java SE 21 Developer (In Progress)</li>
-                <li><strong>Cisco Networking Academy:</strong> Python Essentials 1 & 2</li>
-                <li><strong>Cisco Networking Academy:</strong> CCNA (Cisco Certified Network Associate)</li>
-                <li><strong>Cisco IT Essentials:</strong> IT Hardware & Software Fundamentals</li>
-                <li><strong>English for IT</strong> Level 1 (In Progress)</li>
-            </ul>
+        if (elementTop < windowHeight - revealPoint) {
+          element.classList.add('active');
+        }
+      });
+    };
 
-            <h3 style="margin-top: 2rem; font-size: 1.3rem; color: var(--gold);">Soft Skills & Core Competencies</h3>
-            <ul>
-                <li>Analytical thinking and advanced problem-solving</li>
-                <li>Team collaboration and leadership in agile environments</li>
-                <li>Adaptability to emerging technologies and frameworks</li>
-                <li>Strong organization and deadline commitment</li>
-                <li>Clear communication and technical documentation</li>
-            </ul>
+    window.addEventListener('scroll', revealOnScroll);
+    revealOnScroll(); // Initial check on page load
 
-            <h3 style="margin-top: 2rem; font-size: 1.3rem; color: var(--gold);">Languages</h3>
-            <ul>
-                <li>🇸🇦 Arabic – Native Speaker</li>
-                <li>🇫🇷 French – Professional Level</li>
-                <li>🇬🇧 English – Technical Intermediate Level</li>
-            </ul>
-
-            <h3 style="margin-top: 2rem; font-size: 1.3rem; color: var(--gold);">Interests & Passions</h3>
-            <ul>
-                <li>Reading technical documentation and industry blogs</li>
-                <li>Photography and visual content creation</li>
-                <li>Travel and cultural exploration</li>
-            </ul>
-        </section>
-
-        <!-- Contact Section -->
-        <section class="contact-section" id="contact">
-            <div class="section-header" style="margin: 0;">
-                <h2>Let's Connect</h2>
-                <p>Always excited about new opportunities and challenging projects</p>
-            </div>
-            <div class="contact-links">
-                <a href="mailto:bilalwafae078@gmail.com" class="contact-link">
-                    <i class="fas fa-envelope"></i> Email
-                </a>
-                <a href="https://www.linkedin.com/in/wafae-bilal-479073273" target="_blank" class="contact-link">
-                    <i class="fab fa-linkedin"></i> LinkedIn
-                </a>
-                <a href="https://github.com/bilalwafae" target="_blank" class="contact-link">
-                    <i class="fab fa-github"></i> GitHub
-                </a>
-            </div>
-        </section>
-    </main>
-
-    <!-- Dark Mode Toggle -->
-    <button class="dark-mode-toggle" id="darkModeToggle" title="Toggle Dark Mode">
-        <i class="fas fa-sun"></i>
-    </button>
-
-    <!-- Footer -->
-    <footer>
-        <p><strong>© 2025 Wafae Bilal</strong> – All Rights Reserved</p>
-        <p>Backend Developer | Software Engineering Student | Full-Stack Learner</p>
-    </footer>
-
-    <script>
-        // Smooth scroll for navigation
-        document.querySelectorAll('nav a').forEach(link => {
-            link.addEventListener('click', (e) => {
-                const href = link.getAttribute('href');
-                if (href.startsWith('#')) {
-                    e.preventDefault();
-                    const element = document.querySelector(href);
-                    element?.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
-
-        // CTA button functionality
-        document.querySelector('.cta-btn').addEventListener('click', () => {
-            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-        });
-
-        // View Work button
-        document.querySelector('.btn-secondary').addEventListener('click', () => {
-            document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
-        });
-
-        // Download CV button
-        document.querySelector('.btn-primary').addEventListener('click', () => {
-            alert('CV download functionality can be added here!');
-        });
-
-        // Dark Mode Toggle (optional - currently disabled for light mode default)
-        const darkModeToggle = document.getElementById('darkModeToggle');
-        const htmlElement = document.documentElement;
-        const toggleIcon = darkModeToggle.querySelector('i');
-
-        darkModeToggle.addEventListener('click', () => {
-            console.log('Dark mode toggle clicked');
-        });
-    </script>
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  </script>
 </body>
+
 </html>
